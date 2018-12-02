@@ -1,35 +1,15 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: webapp1-svc
-  labels:
-    app: webapp1
-spec:
-  ports:
-  - port: 80
-  selector:
-    app: webapp1
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: webapp2-svc
-  labels:
-    app: webapp2
-spec:
-  ports:
-  - port: 80
-  selector:
-    app: webapp2
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: webapp3-svc
-  labels:
-    app: webapp3
-spec:
-  ports:
-  - port: 80
-  selector:
-    app: webapp3
+name: hello-webapp  # name of the service
+
+# The service 'track' can be used to easily implement the pattern described here:
+#
+#   https://kubernetes.io/docs/concepts/cluster-administration/manage-deployment/#canary-deployments
+#
+# The default track is named 'stable'. Each track is concurrently
+# deployed in order ot enable multiple long lived canaries:
+#
+# track: my-canary
+
+targetPort: 8080   # port the container exposes
+
+memory: 0.25G      # minimum available memory necessary to schedule the service
+cpu: 0.25          # minimum available cpu necessary to schedule the service
